@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  app:
+    # platform: linux/amd64
+    build:
+      context: .
+      dockerfile: ../../Dockerfile.dev
+    container_name: demo-domain
+    ports:
+      - 8080:8080
+    volumes:
+      - ../../:/go/src/app
+      - $GOPATH/pkg/mod:/go/pkg/mod
+    working_dir: /go/src/app/cmd/demo-domain
+    command: sh docker-entrypoint-go-dev.sh
